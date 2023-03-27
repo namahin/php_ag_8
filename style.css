@@ -71,3 +71,7 @@
 .btn:hover {
     background-color: black;
 }
+.error{
+    font-size: 14px;
+    color: red;
+}

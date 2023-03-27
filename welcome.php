@@ -1,5 +1,4 @@
 <?php
-// Start session to access user information
 session_start();
 
 // Check if user is logged in
@@ -10,5 +9,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 // Display welcome message with user's first name
-echo "Welcome, " . $_SESSION['first_name'] . "!";
+
+echo "<h1>Welcome, " . $_SESSION['first_name'] . "!</h1>";
+
 ?>

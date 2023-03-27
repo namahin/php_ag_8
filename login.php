@@ -1,5 +1,4 @@
 <?php
-// Start session to store user information
 session_start();
 
 // Check if form was submitted
@@ -17,9 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         while (($row = fgetcsv($file)) !== false) {
             // Check if the email address matches
             if ($row[2] == $email) {
-                // Email address matches, so check if the password is correct
                 if (password_verify($password, $row[3])) {
-                    // Password is correct, so store user information in session
                     $_SESSION['first_name'] = $row[0];
                     $_SESSION['last_name'] = $row[1];
                     $_SESSION['email'] = $row[2];
@@ -28,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     header("Location: welcome.php");
                     exit();
                 } else {
-                    // Password is incorrect, so display error message
+                    // Password is incorrect display error message
                     $error = "Invalid login credentials.";
                 }
                 break;
@@ -49,17 +46,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<!-- HTML code for login form -->
-<form method="post">
-    <label>Email address:</label>
-    <input type="email" name="email" required>
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
 
-    <?php if (isset($error)): ?>
-        <div class="error"><?php echo $error; ?></div>
-    <?php endif; ?>
 
-    <button type="submit">Log in</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <!--  -->
+    <link rel="stylesheet" href="style.css">
+
+<body>
+
+<section class="form-sec">
+        <div class="container">
+
+<!-- login form -->
+        <form method="post">
+        <h1>User Login</h1>
+        <div class="field">
+            <label>Email address:</label>
+            <input type="email" name="email" required>
+        </div>
+        <div class="field">
+            <label>Password:</label>
+            <input type="password" name="password" required>
+        </div>
+            <?php if (isset($error)): ?>
+                <div class="error" style="color: red; margin-top: 10px;"><?php echo $error; ?></div>
+            <?php endif; ?>
+
+            <button class="btn" type="submit">Log in</button>
+        </form>
+
+            </div>
+        
+        </section>
+    
+    </body>
+    
+    </html>
